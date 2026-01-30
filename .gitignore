@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+venv/
+.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Optional: uncomment to exclude generated outputs
+# metrics_comparison.xlsx
+# cumulative_returns.png
+# sharpe_heatmap.png
