@@ -1,0 +1,44 @@
+# Gold-Silver DCA Backtest Configuration
+# All parameters can be overridden here; defaults in code apply if key is missing.
+
+# Data range (full sample)
+start_date: '2023-01-01'
+end_date: '2025-12-31'
+
+# Multi-period: in-sample optimization vs out-of-sample evaluation (optional)
+# If set, optimize on in_sample, then evaluate same (freq, ratio) on out_of_sample
+in_sample_start: '2023-01-01'
+in_sample_end: '2023-12-31'
+out_of_sample_start: '2024-01-01'
+out_of_sample_end: '2025-12-31'
+use_multi_period: true
+
+# Risk-free rate (annual) and single DCA amount (CNY)
+risk_free_rate_annual: 0.03
+total_amount_per_dca: 2000
+
+# Transaction costs
+cost_buy_fee: 0.0015
+cost_buy_slippage: 0.0005
+cost_sell_fee: 0.0015
+cost_sell_stamp: 0.001
+
+# CVaR: 95% confidence; relaxed max 30%/year so constraint is often feasible
+cvar_confidence: 0.95
+cvar_max_annual: 0.30
+
+# Max drawdown constraint (optional): e.g. 0.15 = -15% max drawdown allowed
+# Set to null to disable
+max_drawdown_annual: 0.15
+
+# Symbols (Yahoo Finance)
+gold_symbol: 'GC=F'
+silver_symbol: 'SI=F'
+
+# Optimization
+freq_options: ['weekly', 'biweekly', 'monthly']
+gold_ratio_bounds: [0.3, 0.7]
+
+# Soft CVaR: when no feasible solution, penalize CVaR excess in objective (weight >= 0)
+# 0 = ignore CVaR when infeasible; >0 = minimize -Sharpe + cvar_penalty_weight * max(0, CVaR - cvar_max_annual)
+cvar_penalty_weight: 0.5
